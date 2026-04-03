@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>📊 Summary</h2>
+    <p>Income: {{ income }}</p>
+    <p>Expense: {{ expense }}</p>
+    <h3>Balance: {{ balance }}</h3>
+</div>
+
+{% if role == "admin" %}
+<!-- ADMIN VIEW -->
+<div class="card">
+    <h2>Admin Controls</h2>
+    <a href="/add"><button>Add Transaction</button></a>
+</div>
+{% endif %}
+
+<h2>📋 Transactions</h2>
+
+<table>
+<tr>
+<th>ID</th><th>Amount</th><th>Type</th><th>Category</th><th>Date</th><th>Actions</th>
+</tr>
+
+{% for t in transactions %}
+<tr>
+<td>{{ t.id }}</td>
+<td>{{ t.amount }}</td>
+<td>{{ t.type }}</td>
+<td>{{ t.category }}</td>
+<td>{{ t.date }}</td>
+
+<td>
+{% if role == "admin" %}
+    <a href="/edit/{{ t.id }}">Edit</a> |
+    <a href="/delete/{{ t.id }}">Delete</a>
+{% else %}
+    <span style="color:gray;">View Only</span>
+{% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+
+{% if role == "viewer" %}
+<div class="card">
+    <h3>👀 Viewer Mode</h3>
+    <p>You can only view data. Contact admin for changes.</p>
+</div>
+{% endif %}
+
+{% endblock %}
