@@ -145,6 +145,4 @@ This project successfully demonstrates the core concepts of backend development 
 
 ## 👨‍💻 Author
 
-Your Name Here
-
----
+Sabeeha Irshad
